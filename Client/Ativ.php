@@ -116,64 +116,47 @@
 					<!-- Número de Registros -->
 					<h2>Autenticar Usuario</h2>
 					<label>Usuario</label>
-					<input type="text" class="form-control" name="usuario_get">
+					<input type="text" class="form-control" name="usuario_get" maxlength="20">
 					<label>Senha</label>
-					<input type="password" class="form-control" name="senha_get">
+					<input type="password" class="form-control" name="senha_get" maxlength="20">
 					<br>
-					<?php
-						if($get != "") {
-							echo "<h4><b>Lista de Produtos</b></h4>";
-							echo "<div class='alert alert-success' role='alert'>";
-								$dadoJson = json_decode($get);
-
-								echo "<strong>Retorno do Web Service!</strong>";
-
-								if($dadoJson->msg != null) {
-									echo "<br>$dadoJson->msg";
-								}
-								else {
-									foreach ($dadoJson as $dado) {
-										
-				   						echo "<br>$dado->nome";
-									}
-								}
-
-			 				echo "</div>";
-						}
-					?>
 					<button type="submit" name="botao" value="get" class="btn btn-primary btn-block">
 						<b>Confirmar / Autenticar</b>
 					</button>
+					<br>
+					<?php
+						if($get != "") {
+
+							$dadoJson = json_decode($get);
+							echo "<br>";
+							echo "<div class='alert alert-success' role='alert'>";
+								echo "<strong>Retorno do Web Service!</strong>";
+								echo "<br>$dadoJson->msg";
+			 				echo "</div>";
+						}
+					?>
+					
 				</div>
 
-				<!-- GET -->
+				<!-- Validar -->
 				<div class='col-sm-3'>
 					<!-- Número de Registros -->
 					<h2>Validar CPF</h2>
 					<label>CPF</label>
-					<input type="number" class="form-control" name="sasa" placeholder="517.223.830-11">
+					<input type="text" class="form-control" name="put" placeholder="517.223.830-11">
 					<br>
-					<!-- <?php
-						if($get != "") {
+					<?php
+						if($put != "") {
 							echo "<h4><b>Lista de Produtos</b></h4>";
 							echo "<div class='alert alert-success' role='alert'>";
-								$dadoJson = json_decode($get);
+								$dadoJson = json_decode($put);
 
 								echo "<strong>Retorno do Web Service!</strong>";
-
-								if($dadoJson->msg != null) {
-									echo "<br>$dadoJson->msg";
-								}
-								else {
-									foreach ($dadoJson as $dado) {
-				   						echo "<br>($dado->id) $dado->nome";
-									}
-								}
-
+								echo "$dadoJson->msg";
 			 				echo "</div>";
 						}
-					?> -->
-					<button type="submita" name="botaao" value="get" class="btn btn-warning btn-block">
+					?> 
+					<button type="submita" name="botao" value="put" class="btn btn-warning btn-block">
 						<b>Validar</b>
 					</button>
 				</div>

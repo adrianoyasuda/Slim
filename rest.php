@@ -8,7 +8,7 @@
 	// CONEXÃO COM O BD
 	function getConn() {
 
-		return new PDO('mysql:host=localhost;dbname=AulaSlim', 'root', 'root',
+		return new PDO('mysql:host=infoprojetos.com.br;port=3132;dbname=tads17_yasuda', 'tads17_yasuda', '081012',
 				array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	}
 
@@ -20,14 +20,26 @@
 	// GET - Selecionar
 	$app->get('/:dados', function($dados) {
 
-		$dadoJson = json_decode( $dados );
+		$dadoJson = json_decode($dados);
+
+		$user = $dadoJson->usuario;
+		$senha = $dadoJson->senha;
 
 		$conn = getConn();
-		$sql = "SELECT * FROM tb_usuario_slim LIMIT $dadoJson->usuario";
+		$sql = "SELECT * FROM tb_usuario_slim WHERE usuario = :usuario AND senha = :senha LIMIT 1";
 		$stmt = $conn->prepare($sql);
+		$stmt->bindParam("usuario", $user);
+		$stmt->bindParam("senha", $senha);
 		$stmt->execute();
 
-		echo json_encode($stmt->fetchAll());
+		$dadoJson = $stmt->fetchAll();
+
+		if(empty($dadoJson)){
+			echo json_encode(array('msg' => "[ERRO] Usuário ou Senha incorretos!"));
+		}
+		else {
+			echo json_encode(array('msg' => "[OK] Usuário ($user) Logado!"));
+		}
 
 	});
 
@@ -45,7 +57,7 @@
 		$stmt->execute();
 		$id = $conn->lastInsertId();
 
-		echo json_encode( array('msg' => "[OK] Produto ($id) Cadastro com Sucesso!") );
+		echo json_encode( array('msg' => "[OK] Usuario ($id) Cadastro com Sucesso!") );
 	});
 
 	// PUT - Alterar

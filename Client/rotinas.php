@@ -2,14 +2,14 @@
 
 	function getConn() {
 
-		return new PDO('mysql:host=localhost;dbname=AulaSlim', 'root', 'root',
+		return new PDO('mysql:host=infoprojetos.com.br;port=3132;dbname=tads17_yasuda', 'tads17_yasuda', '081012',
 					array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	}
 
 	function GET() {
 
 		// DADO DE ENTRADA VAZIO - ERRO
-		if($_POST['usuario_get'] == "") {
+		if($_POST['usuario_get'] == "" || $_POST['senha_get'] == "" ) {
 		 	return json_encode( array('msg' => '[ERRO] Preencha o Campo de Entrada!') );
 		}
 
@@ -24,6 +24,8 @@
 		// INVOCA A URL DO WEBSERVICE
 		$curl_resposta = curl_exec($curl);
 		curl_close($curl);
+
+
 
 		return $curl_resposta;
 	}
