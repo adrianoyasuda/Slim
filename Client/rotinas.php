@@ -58,15 +58,12 @@
 	function PUT() {
 
 		// DADO DE ENTRADA VAZIO - ERRO
-		if($_POST['id_put'] == "" || $_POST['nome_put'] == "") {
+		if($_POST['cpf_put'] == "" ) {
 			return json_encode( array('msg' => '[ERRO] Preencha o Campo de Entrada!') );
 		}
-
 		// MONTA ARRAY DE DADOS
-		$dados = array('id' => $_POST['id_put'],
-			'nome' => mb_strtoupper($_POST['nome_put'], 'UTF-8')
-		);
-
+		$dados = array('cpf' => $_POST['cpf_put']);
+		
 		// INICIALIZA/CONFIGURA CURL
 		$curl = curl_init("http://localhost/Slim/rest.php");
 		// CONFIGURA AS OPÇÕES (parâmetros)
@@ -74,6 +71,7 @@
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
 		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($dados));
 		// INVOCA A URL DO WEBSERVICE
+		
 		$curl_resposta = curl_exec($curl);
 		curl_close($curl);
 

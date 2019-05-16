@@ -48,6 +48,24 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+		function fMasc(objeto,mascara) {
+			obj=objeto
+			masc=mascara
+			setTimeout("fMascEx()",1)
+		}
+		function fMascEx() {
+			obj.value=masc(obj.value)
+		}
+		function mCPF(cpf){
+			cpf=cpf.replace(/\D/g,"")
+			cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+			cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+			cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+			return cpf
+		}
+	</script>
+
   </head>
 
   <body role="document">
@@ -143,23 +161,25 @@
 					<!-- Número de Registros -->
 					<h2>Validar CPF</h2>
 					<label>CPF</label>
-					<input type="text" class="form-control" name="put" placeholder="517.223.830-11">
+					<input type="text" class="form-control" name="cpf_put" minlength="14" maxlength="14" onkeydown="javascript: fMasc(this, mCPF);" placeholder="517.223.830-11">
+					<br>
+					<button type="submit" name="botao" value="put" class="btn btn-warning btn-block">
+						<b>Validar</b>
+					</button>
 					<br>
 					<?php
 						if($put != "") {
-							echo "<h4><b>Lista de Produtos</b></h4>";
 							echo "<div class='alert alert-success' role='alert'>";
-								$dadoJson = json_decode($put);
 
-								echo "<strong>Retorno do Web Service!</strong>";
-								echo "$dadoJson->msg";
+								$dadoJson = json_decode($put);
+								$msg =  $dadoJson->{'msg'};
+
+								echo "<strong>Retorno do Web Service!</strong>$msg";
 			 				echo "</div>";
 						}
 					?> 
-					<button type="submita" name="botao" value="put" class="btn btn-warning btn-block">
-						<b>Validar</b>
-					</button>
 				</div>
+				
 			</div>
 		</form>
 
