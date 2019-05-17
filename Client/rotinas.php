@@ -64,6 +64,7 @@
 		// MONTA ARRAY DE DADOS
 		$dados = array('cpf' => $_POST['cpf_put']);
 		
+
 		// INICIALIZA/CONFIGURA CURL
 		$curl = curl_init("http://localhost/Slim/rest.php");
 		// CONFIGURA AS OPÇÕES (parâmetros)
@@ -77,28 +78,5 @@
 
 		return $curl_resposta;
 
-	}
-
-	function DELETE() {
-
-		// DADO DE ENTRADA VAZIO - ERRO
-		if($_POST['id_delete'] == "") {
-			return json_encode( array('msg' => '[ERRO] Preencha o Campo de Entrada!') );
-		}
-
-		// MONTA ARRAY DE DADOS
-		$dados = array('id' => $_POST['id_delete']);
-
-		// INICIALIZA/CONFIGURA CURL
-		$curl = curl_init("http://localhost/Slim/rest.php");
-		// CONFIGURA AS OPÇÕES (parâmetros)
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
-		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($dados));
-		// INVOCA A URL DO WEBSERVICE
-		$curl_resposta = curl_exec($curl);
-		curl_close($curl);
-
-		return $curl_resposta;
 	}
 ?>

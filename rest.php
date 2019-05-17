@@ -1,7 +1,7 @@
 <?php
 
 	require 'Slim/Slim.php';
-	require 'Client/ValidadorCPF.php';
+	require 'Client/ValidaCPF.php';
 
 	\Slim\Slim::registerAutoloader();
 
