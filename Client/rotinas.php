@@ -2,7 +2,7 @@
 
 	function getConn() {
 
-		return new PDO('mysql:host=infoprojetos.com.br;port=3132;dbname=tads17_yasuda', 'tads17_yasuda', '081012',
+		return new PDO('mysql:host=infoprojetos.com.br;port=3132;dbname=tads**_******', 'tads**_******', '******',
 					array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	}
 
